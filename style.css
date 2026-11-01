@@ -1,62 +1,180 @@
+/* 1. การรีเซ็ตและสไตล์ทั่วไป */
 * {
-    box-sizing: border-box; 
+    box-sizing: border-box; /* ปรับขนาดกล่องให้รวม padding และ border */
 }
 
-body {
-    font-family: sans-serif;
-    background: #ffffff;
-    margin: 0;
-    padding: 30px 16px;
-    color: black;
-}
-
-.Profile-card {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 30px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(15, 39, 71, 0.12);
+body { /* การจัดรูปแบบตัวอักษรและพื้นหลัง */
+    font-family: sans-serif;  /* ปรับฟอนต์ */
+    background-color: #e1f5fe; /* ปรับสีพื้นหลัง */
+    color: #000000; /* ปรับสีข้อความ */
+    margin: 0; /* ลบระยะขอบ */
+    padding: 30px 16px; /* ปรับระยะขอบและระยะขอบด้านใน */
 }
 
 h1 {
-    color: blue;
-    text-align: center;
+    color: #0f0f12; /* ปรับสีหัวข้อหลัก */
+    text-align: center; /* ปรับสีหัวข้อหลักและจัดกึ่งกลาง */
 }
 
-
-.motto {
-    margin-top: 24px;
-    padding: 16px;
-    background: #ffffff;
-    border-left: 5px solid #2563eb;
-    border-radius: 8px;
+h2 {
+    color: #000000; /* ปรับสีหัวข้อทักษะและผลงาน */
 }
 
-button {
-    margin-top: 16px;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    background: #2563eb;
-    color: aliceblue;
-    font-size: 16px;
-    cursor: pointer;
+/* 2. ส่วนหัวของเว็บไซต์และการนำทาง */
+.site-header { /* การจัดรูปแบบส่วนหัวของเว็บไซต์ */
+    border-radius: 90px; /* ปรับมุมโค้ง */
+    display: flex; /* จัดเรียงในแนวนอน */
+    justify-content: space-between; /* จัดเรียงในแนวตั้ง */
+    align-items: center; /* จัดเรียงในแนวนอน */
+    gap: 16px; /* ปรับระยะห่างระหว่างรายการเมนู */
+    flex-wrap: wrap; /* จัดเรียงในแนวตั้งเมื่อหน้าจอเล็ก */
+    background: #80deea; /* สีพื้นหลัง */
+    color: #ffffff; /* สีข้อความ */
+    padding: 20px 8%; /* ปรับระยะขอบ */
 }
 
-button:hover {
-    background: #1e40af;
+.site-header h1 { /* การจัดรูปแบบหัวข้อในส่วนหัว */
+    font-size: 24px; /* ปรับขนาดตัวอักษร */
 }
 
-#message {
-    color: #2563eb;
-    font-weight: bold;
+.site-header nav ul { /* การจัดรูปแบบรายการเมนูนำทาง */
+    display: flex; /* จัดเรียงรายการเมนูในแนวนอน */
+    gap: 16px; /* ปรับระยะห่างระหว่างรายการเมนู */
+    list-style: none; /* ลบรายการสัญลักษณ์ */
+    padding: 0; /* ลบรายการสัญลักษณ์ */
+    margin: 0; /* ลบระยะขอบและระยะขอบด้านใน */
 }
-.profile-photo {
-    display: block;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    object-fit: cover;
+
+.site-header nav a { /* การจัดรูปแบบลิงก์ในเมนูนำทาง */
+    color: #000000; /* ปรับสีข้อความ */
+}
+
+/* 3. โครงสร้างหลักของหน้าเว็บ */
+.portfolio-main { /* การจัดรูปแบบโครงสร้างหลักของหน้าเว็บ */
+    width: 100%; /* ปรับความกว้าง */
+    max-width: 950px; /* ปรับความกว้างสูงสุด */
+    margin: 24px auto; /* จัดกึ่งกลาง */
+    padding: 0; /* ปรับระยะขอบ */
+}
+
+/* 4. การ์ดโปรไฟล์ */
+.profile-section { /* การจัดรูปแบบการ์ดโปรไฟล์ */
+    width: 100%; /* ปรับความกว้าง */
+    margin: 24px auto; /* ปรับระยะขอบด้านบนและด้านล่าง */
+    padding: 28px; /* ปรับระยะขอบ */
+    background: #b3e5fc; /* ปรับสีพื้นหลัง */
+    border-radius: 16px; /* ปรับมุมโค้ง */
+    box-shadow: 0 8px 24px rgba(15, 39, 71, 0.12); /* ปรับเงา */
+}
+
+.profile-photo { /* การจัดรูปแบบรูปภาพโปรไฟล์ */
+    display: block; /* จัดรูปแบบรูปภาพโปรไฟล์ */
+    width: 120px; /* ปรับขนาดรูปภาพ */
+    height: 120px; /* ปรับขนาดรูปภาพ */
+    margin: 0 auto 20px; /* จัดกึ่งกลางและปรับระยะขอบด้านล่าง */
+    border-radius: 50%; /* ปรับมุมโค้งให้เป็นวงกลม */
+    object-fit: cover; /* ปรับขนาดรูปภาพให้พอดีและครอบตัด */
+}
+
+/* 5. คติพจน์ / คำคมประจำใจ */
+.motto { /* การจัดรูปแบบคติพจน์ / คำคมประจำใจ */
+    font-style: italic; /* ปรับสไตล์ตัวอักษรเป็นตัวเอียง */
+    color: #263238; /* ปรับสีข้อความ */
+    margin-top: 24px; /* ปรับระยะขอบด้านบน */
+    padding: 16px; /* ปรับระยะขอบ */
+    background: #ffffff; /* ปรับสีพื้นหลัง */
+    border-left: 5px solid #2563eb; /* ปรับสีเส้นขอบด้านซ้าย */
+    border-radius: 8px; /* ปรับมุมโค้ง */
+}
+
+/* 6. การ์ดทักษะและผลงาน */
+.content-section { /* การจัดรูปแบบการ์ดทักษะและผลงาน */
+    width: 100%; /* ปรับความกว้าง */
+    margin: 24px auto; /* ปรับระยะขอบด้านบนและด้านล่าง */
+    padding: 28px; /* ปรับระยะขอบ */
+    background: #b3e5fc; /* ปรับสีพื้นหลัง */
+    border: 1px solid #cbd5e1; /* ปรับสีเส้นขอบ */
+    border-radius: 16px; /* ปรับมุมโค้ง */
+}
+
+.content-section h2 { /* การจัดรูปแบบหัวข้อทักษะและผลงาน */
+    color: #000000; /* ปรับสีหัวข้อทักษะและผลงาน */
+}
+
+.skills-list { /* การจัดรูปแบบรายการทักษะ */
+    padding-left: 24px; /* ปรับระยะขอบด้านซ้าย */
+}
+
+.skills-list li { /* การจัดรูปแบบรายการทักษะ */
+    margin-bottom: 8px; /* ปรับระยะขอบด้านล่าง */
+}
+
+/* 7. การ์ดผลงาน / การ์ดโปรเจกต์ */
+.project-card { /* การจัดรูปแบบการ์ดผลงาน */
+    margin-top: 16px; /* ปรับระยะขอบด้านบน */
+    padding: 20px; /* ปรับระยะขอบ */
+    background: #eff6ff; /* ปรับสีพื้นหลัง */
+    border: 1px solid #bfdbfe; /* ปรับสีเส้นขอบ */
+    border-radius: 12px; /* ปรับมุมโค้ง */
+}
+
+.project-card h3 { /* การจัดรูปแบบหัวข้อผลงาน */
+    color: #1d4ed8; /* ปรับสีหัวข้อผลงาน */
+}
+
+/* 8. ปุ่มกด */
+button { /* การจัดรูปแบบปุ่ม */
+    margin-top: 16px; /* ปรับระยะขอบด้านบน */
+    padding: 12px 24px; /* ปรับระยะขอบ */
+    border: none; /* ลบเส้นขอบ */
+    border-radius: 8px; /* ปรับมุมโค้ง */
+    background: #2563eb; /* ปรับสีพื้นหลัง */
+    color: #f0f8ff; /* ปรับสีข้อความ */
+    font-size: 16px; /* ปรับขนาดตัวอักษร */
+    cursor: pointer; /* ปรับเคอร์เซอร์เป็น pointer */
+}
+
+button:hover { /* การปรับสีเมื่อเมาส์ชี้ */
+    background: #1e40af; /* ปรับสีเมื่อเมาส์ชี้ */
+}
+
+#greetingMessage { /* การจัดรูปแบบข้อความทักทาย */
+    color: #2563eb; /* ปรับสีข้อความ */
+    font-weight: bold; /* ปรับสีข้อความและความหนา */
+}
+
+/* 9. ส่วนท้ายของหน้าเว็บ */
+.site-footer { /* การจัดรูปแบบส่วนท้าย */
+    border-radius: 90px; /* ปรับมุมโค้ง */
+    margin-top: 40px; /* ปรับระยะขอบด้านบน */
+    padding: 24px; /* ปรับระยะขอบ */
+    background: #0f172a; /* สีพื้นหลัง */
+    color: #ffffff; /* สีข้อความ */
+    text-align: center; /* จัดกึ่งกลางข้อความ */
+}
+
+.site-footer p { /* 9.1 การจัดรูปแบบข้อความในส่วนท้าย */
+    margin: 4px 0; /* ปรับระยะขอบ */
+}
+
+/* 10. การรองรับทุกขนาดหน้าจอ (การออกแบบรองรับทุกอุปกรณ์) */
+@media (max-width: 600px) { /* สำหรับหน้าจอขนาดเล็ก */
+    body { /* 10.1 การปรับขนาดตัวอักษรและระยะขอบ */
+        padding: 16px 10px; /* ปรับระยะขอบ */
+    }
+
+    .site-header { /* 10.2 การปรับการจัดวางส่วนหัว */
+        padding: 20px; /* ปรับระยะขอบ */
+        flex-direction: column; /* จัดเรียงในแนวตั้ง */
+    }
+
+    .site-header nav ul { /* 10.3 การปรับการจัดวางเมนูนำทาง */
+        flex-wrap: wrap; /* จัดเรียงเมนูในแนวตั้ง */
+        justify-content: center; /* จัดกึ่งกลาง */
+    }
+
+    .profile-section, /* 10.4 การปรับการ์ดโปรไฟล์ */
+    .content-section { /* 10.5 การปรับการ์ดทักษะและผลงาน */
+        padding: 20px; /* ปรับระยะขอบ */
+    }
 }
