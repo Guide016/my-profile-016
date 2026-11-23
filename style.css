@@ -1,311 +1,580 @@
-/* =================================
-   1. การรีเซ็ตและสไตล์ทั่วไป
-================================= */
+/* ==========================================================================
+   1. ตัวแปรสีและธีม (CSS Variables & Theming)
+   ========================================================================== */
+
+:root {
+    /* โทนสี Light Mode (สไตล์เดิมของเว็บไซต์: สีฟ้าสดใส สบายตา) */
+    --bg-page: #e1f5fe;
+    --bg-header: #80deea;
+    --bg-card: #b3e5fc;
+    --bg-card-inner: #eff6ff;
+    --bg-motto: #ffffff;
+    --bg-estimator-result: #f0f5ff;
+    --bg-footer: #0f172a;
+    --bg-input: #ffffff;
+    --bg-modal: #ffffff;
+    
+    --text-primary: #0f0f12;
+    --text-secondary: #334155;
+    --text-title: #0f0f12;
+    --text-motto: #263238;
+    --text-muted: #64748b;
+    --text-footer: #ffffff;
+    
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-light: #dbeafe;
+    --accent-blue: #1e40af;
+    --accent-green: #16a34a;
+    --error-color: #dc2626;
+    --error-bg: #fef2f2;
+    --success-bg: #ecfdf5;
+    --success-border: #a7f3d0;
+    --success-text: #065f46;
+    
+    --border-card: #cbd5e1;
+    --border-inner: #bfdbfe;
+    --border-input: #cbd5e1;
+    --border-hover: #93c5fd;
+    --border-focus: #2563eb;
+    
+    --shadow-card: 0 8px 24px rgba(15, 39, 71, 0.12);
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-modal: 0 20px 40px rgba(0, 0, 0, 0.25);
+    
+    --transition-speed: 0.3s;
+}
+
+/* โทนสี Dark Mode (โหมดมืดที่อ่านง่าย เป็นมิตรกับสายตา และคงความโมเดิร์น) */
+body.dark-mode {
+    --bg-page: #0b1120;
+    --bg-header: #1e293b;
+    --bg-card: #1e293b;
+    --bg-card-inner: #0f172a;
+    --bg-motto: #182234;
+    --bg-estimator-result: #131c2e;
+    --bg-footer: #030712;
+    --bg-input: #0f172a;
+    --bg-modal: #1e293b;
+    
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-title: #ffffff;
+    --text-motto: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-footer: #94a3b8;
+    
+    --primary-color: #38bdf8;
+    --primary-hover: #0ea5e9;
+    --primary-light: #1e3a5f;
+    --accent-blue: #60a5fa;
+    --accent-green: #4ade80;
+    --error-color: #f87171;
+    --error-bg: #450a0a;
+    --success-bg: #064e3b;
+    --success-border: #059669;
+    --success-text: #a7f3d0;
+    
+    --border-card: #334155;
+    --border-inner: #334155;
+    --border-input: #475569;
+    --border-hover: #60a5fa;
+    --border-focus: #38bdf8;
+    
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-modal: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   2. การรีเซ็ตและสไตล์ทั่วไป
+   ========================================================================== */
 
 * {
-    box-sizing: border-box; /* กำหนดขนาดกล่องให้รวม padding และ border */
+    box-sizing: border-box;
+    transition: background-color var(--transition-speed) ease, 
+                border-color var(--transition-speed) ease, 
+                color var(--transition-speed) ease;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: sans-serif; /* กำหนดรูปแบบตัวอักษร */
-    background-color: #e1f5fe; /* กำหนดสีพื้นหลังเว็บไซต์ */
-    color: #000000; /* กำหนดสีข้อความ */
-    margin: 0; /* ลบระยะขอบด้านนอก */
-    padding: 30px 16px; /* กำหนดระยะห่างด้านใน */
+    font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 30px 16px;
+    line-height: 1.6;
 }
 
 h1 {
-    color: #0f0f12; /* กำหนดสีหัวข้อหลัก */
-    text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+    color: var(--text-title);
+    text-align: center;
 }
 
 h2 {
-    color: #000000; /* กำหนดสีหัวข้อรอง */
+    color: var(--text-title);
+    margin-top: 0;
 }
 
+h3 {
+    margin-top: 0;
+}
 
-/* =================================
-   2. ส่วนหัวของเว็บไซต์และการนำทาง
-================================= */
+p {
+    color: var(--text-secondary);
+}
+
+.section-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: -6px;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   3. ส่วนหัวของเว็บไซต์และการนำทาง (Header & Navbar)
+   ========================================================================== */
 
 .site-header {
-    border-radius: 20px; /* กำหนดความโค้งของมุม */
-    display: flex; /* จัดเรียงองค์ประกอบด้วย Flexbox */
-    justify-content: space-between; /* จัดระยะห่างระหว่างองค์ประกอบ */
-    align-items: center; /* จัดองค์ประกอบให้อยู่กึ่งกลางแนวตั้ง */
-    gap: 16px; /* กำหนดระยะห่างระหว่างองค์ประกอบ */
-    flex-wrap: wrap; /* อนุญาตให้ขึ้นบรรทัดใหม่เมื่อพื้นที่ไม่พอ */
-    background: #80deea; /* กำหนดสีพื้นหลังส่วนหัว */
-    color: #ffffff; /* กำหนดสีข้อความ */
-    padding: 20px 8%; /* กำหนดระยะห่างด้านใน */
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: var(--bg-header);
+    color: var(--text-primary);
+    padding: 16px 5%;
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 12px;
+    z-index: 100;
+    backdrop-filter: blur(8px);
 }
 
-.site-header h1 {
-    font-size: 24px; /* กำหนดขนาดตัวอักษรหัวข้อ */
+.header-brand h1 {
+    font-size: 24px;
+    margin: 0;
+    color: var(--text-title);
+    white-space: nowrap;
 }
 
 .site-header nav ul {
-    display: flex; /* จัดรายการเมนูในแนวนอน */
-    gap: 16px; /* กำหนดระยะห่างระหว่างเมนู */
-    list-style: none; /* ลบสัญลักษณ์หน้ารายการ */
-    padding: 0; /* ลบระยะห่างด้านใน */
-    margin: 0; /* ลบระยะขอบด้านนอก */
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .site-header nav a {
-    color: #000000; /* กำหนดสีข้อความลิงก์ */
-    text-decoration: none; /* ลบเส้นใต้ข้อความลิงก์ */
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: color 0.2s, background-color 0.2s;
 }
 
 .site-header nav a:hover {
-    color: #2563eb; /* เปลี่ยนสีลิงก์เมื่อเลื่อนเมาส์ */
+    color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
+body.dark-mode .site-header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-/* =================================
-   3. โครงสร้างหลักของเว็บไซต์
-================================= */
+/* ปุ่มสลับธีม (Theme Toggle Button) */
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 2px solid var(--border-card);
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: var(--shadow-soft);
+    margin-top: 0;
+    transition: transform 0.2s ease, background-color var(--transition-speed) ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+    background: var(--primary-light);
+    color: var(--accent-blue);
+    border-color: var(--primary-color);
+}
+
+.theme-icon {
+    font-size: 16px;
+}
+
+/* ==========================================================================
+   4. โครงสร้างหลักของเว็บไซต์
+   ========================================================================== */
 
 .portfolio-main {
-    width: 100%; /* กำหนดความกว้างเต็มพื้นที่ */
-    max-width: 950px; /* กำหนดความกว้างสูงสุด */
-    margin: 24px auto; /* จัดกึ่งกลางและกำหนดระยะห่าง */
-    padding: 0; /* ลบระยะห่างด้านใน */
+    width: 100%;
+    max-width: 950px;
+    margin: 24px auto;
+    padding: 0;
 }
 
-
-/* =================================
-   4. การ์ดโปรไฟล์
-================================= */
+/* ==========================================================================
+   5. การ์ดโปรไฟล์ (Profile Section)
+   ========================================================================== */
 
 .profile-section {
-    width: 100%; /* กำหนดความกว้างเต็มพื้นที่ */
-    margin: 24px auto; /* กำหนดระยะห่างและจัดกึ่งกลาง */
-    padding: 28px; /* กำหนดระยะห่างด้านใน */
-    background: #b3e5fc; /* กำหนดสีพื้นหลังการ์ด */
-    border-radius: 16px; /* กำหนดความโค้งของมุม */
-    box-shadow: 0 8px 24px rgba(15, 39, 71, 0.12); /* เพิ่มเงาให้การ์ด */
+    width: 100%;
+    margin: 24px auto;
+    padding: 28px;
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-card);
 }
 
 .profile-photo {
-    display: block; /* กำหนดให้รูปภาพแสดงเป็นบล็อก */
-    width: 120px; /* กำหนดความกว้างรูปภาพ */
-    height: 120px; /* กำหนดความสูงรูปภาพ */
-    margin: 0 auto 20px; /* จัดรูปภาพกึ่งกลางและกำหนดระยะห่างด้านล่าง */
-    border-radius: 50%; /* ทำให้รูปภาพเป็นวงกลม */
-    object-fit: cover; /* ปรับรูปภาพให้พอดีกับกรอบ */
+    display: block;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease;
 }
 
+.profile-photo:hover {
+    transform: scale(1.04);
+}
 
-/* =================================
-   5. คติพจน์และคำคมประจำใจ
-================================= */
+.profile-section p {
+    font-size: 16px;
+    margin: 8px 0;
+}
 
+.profile-section p span {
+    font-weight: 600;
+    color: var(--text-title);
+}
+
+/* คติประจำใจ (Motto) */
 .motto {
-    font-style: italic; /* กำหนดข้อความเป็นตัวเอียง */
-    color: #263238; /* กำหนดสีข้อความ */
-    margin-top: 24px; /* กำหนดระยะห่างด้านบน */
-    padding: 16px; /* กำหนดระยะห่างด้านใน */
-    background: #ffffff; /* กำหนดสีพื้นหลัง */
-    border-left: 5px solid #2563eb; /* กำหนดเส้นขอบด้านซ้าย */
-    border-radius: 8px; /* กำหนดความโค้งของมุม */
+    font-style: italic;
+    color: var(--text-motto);
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--bg-motto);
+    border-left: 5px solid var(--primary-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
 }
 
+.motto h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
 
-/* =================================
-   6. การ์ดทักษะและผลงาน
-================================= */
+.motto p {
+    color: var(--text-motto);
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   6. การ์ดเนื้อหาทั่วไป (Content Sections)
+   ========================================================================== */
 
 .content-section {
-    width: 100%; /* กำหนดความกว้างเต็มพื้นที่ */
-    margin: 24px auto; /* กำหนดระยะห่างและจัดกึ่งกลาง */
-    padding: 28px; /* กำหนดระยะห่างด้านใน */
-    background: #b3e5fc; /* กำหนดสีพื้นหลังการ์ด */
-    border: 1px solid #cbd5e1; /* กำหนดเส้นขอบการ์ด */
-    border-radius: 16px; /* กำหนดความโค้งของมุม */
+    width: 100%;
+    margin: 24px auto;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
 }
 
-.content-section h2 {
-    color: #000000; /* กำหนดสีหัวข้อในการ์ด */
-}
-
-
-/* =================================
-   7. การ์ดทักษะที่สนใจ
-================================= */
+/* ==========================================================================
+   7. การ์ดทักษะที่สนใจ (Skills Section)
+   ========================================================================== */
 
 #skills {
-    background: #b3e5fc; /* เปลี่ยนพื้นหลังการ์ดเป็นสีขาว */
-    border: 1px solid #e2e8f0; /* กำหนดเส้นขอบสีเทาอ่อน */
-    border-radius: 10px; /* กำหนดความโค้งของมุม */
-    padding: 12px; /* กำหนดระยะห่างด้านใน */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* เพิ่มเงาบาง ๆ ให้การ์ด */
+    border-radius: 16px;
+    padding: 24px;
 }
-
-/* 7.1 ข้อความ WHAT I KNOW */
 
 #skills::before {
-    content: "WHAT I KNOW"; /* เพิ่มข้อความก่อนหัวข้อทักษะ */
-    display: block; /* กำหนดให้ข้อความแสดงเป็นบล็อก */
-    font-size: 8px; /* กำหนดขนาดตัวอักษร */
-    font-weight: bold; /* กำหนดตัวอักษรเป็นตัวหนา */
-    color: #64748b; /* กำหนดสีข้อความ */
-    margin-bottom: 4px; /* กำหนดระยะห่างด้านล่าง */
+    content: "WHAT I KNOW";
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 6px;
 }
-
-/* 7.2 หัวข้อทักษะ */
 
 #skills h2 {
-    color: #1e40af; /* กำหนดสีหัวข้อเป็นสีน้ำเงิน */
-    font-size: 18px; /* กำหนดขนาดตัวอักษร */
-    margin: 0 0 12px; /* กำหนดระยะขอบด้านล่าง */
+    color: var(--accent-blue);
+    font-size: 20px;
+    margin: 0 0 16px;
 }
-
-/* 7.3 รายการทักษะ */
 
 .skills-list {
-    display: flex; /* จัดรายการทักษะในแนวนอน */
-    gap: 8px; /* กำหนดระยะห่างระหว่างรายการ */
-    list-style: none; /* ลบสัญลักษณ์หน้ารายการ */
-    padding: 0; /* ลบระยะห่างด้านใน */
-    margin: 0; /* ลบระยะขอบด้านนอก */
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
-
-/* 7.4 รูปแบบปุ่มทักษะแต่ละรายการ */
 
 .skills-list li {
-    flex: 1; /* กำหนดให้แต่ละรายการแบ่งพื้นที่เท่ากัน */
-    text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
-    background: #eff6ff; /* กำหนดสีพื้นหลังปุ่ม */
-    border: 1px solid #dbeafe; /* กำหนดเส้นขอบปุ่ม */
-    border-radius: 5px; /* กำหนดความโค้งของมุมปุ่ม */
-    padding: 8px 4px; /* กำหนดระยะห่างด้านในปุ่ม */
-    font-size: 13px; /* กำหนดขนาดตัวอักษร */
-    font-weight: bold; /* กำหนดข้อความเป็นตัวหนา */
-    color: #1e293b; /* กำหนดสีข้อความ */
-    margin-bottom: 0; /* ลบระยะห่างด้านล่าง */
+    flex: 1;
+    text-align: center;
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border-inner);
+    border-radius: 8px;
+    padding: 12px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-soft);
+    cursor: default;
+    transition: transform 0.2s, background-color 0.2s;
 }
-
-/* 7.5 เอฟเฟกต์เมื่อเลื่อนเมาส์ */
 
 .skills-list li:hover {
-    background: #dbeafe; /* เปลี่ยนสีพื้นหลังเมื่อเลื่อนเมาส์ */
-    transition: 0.3s; /* กำหนดระยะเวลาการเปลี่ยนแปลง 0.3 วินาที */
+    background: var(--primary-light);
+    color: var(--accent-blue);
+    transform: translateY(-2px);
 }
 
+/* ==========================================================================
+   8. การ์ดผลงานและระบบกรองผลงาน (Projects Grid & Filter)
+   ========================================================================== */
 
-/* =================================
-   8. การ์ดผลงานและโปรเจกต์
-================================= */
+/* ตัวกรองผลงาน (Filter Buttons) */
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding: 4px 0;
+}
+
+.filter-btn {
+    background: var(--bg-card-inner);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-inner);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: var(--primary-light);
+    color: var(--accent-blue);
+    border-color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+/* ตารางแสดงผลงาน (Projects Grid) */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
 
 .project-card {
-    margin-top: 16px; /* กำหนดระยะห่างด้านบน */
-    padding: 20px; /* กำหนดระยะห่างด้านใน */
-    background: #eff6ff; /* กำหนดสีพื้นหลังการ์ด */
-    border: 1px solid #bfdbfe; /* กำหนดเส้นขอบการ์ด */
-    border-radius: 12px; /* กำหนดความโค้งของมุม */
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border-inner);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
+}
+
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.project-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+.badge-web {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-design {
+    background: #fce7f3;
+    color: #9d174d;
+}
+
+.badge-data {
+    background: #dcfce7;
+    color: #166534;
+}
+
+body.dark-mode .badge-web {
+    background: #1e3a5f;
+    color: #93c5fd;
+}
+
+body.dark-mode .badge-design {
+    background: #4c1d47;
+    color: #f472b6;
+}
+
+body.dark-mode .badge-data {
+    background: #14532d;
+    color: #86efac;
 }
 
 .project-card h3 {
-    color: #1d4ed8; /* กำหนดสีหัวข้อผลงาน */
+    color: var(--accent-blue);
+    font-size: 18px;
+    margin: 0 0 10px;
 }
 
+.project-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
 
-/* =================================
-   9. ปุ่มทักทาย
-================================= */
+.project-card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px dashed var(--border-inner);
+    padding-top: 14px;
+}
+
+.project-tech-tags {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.view-details-btn {
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 0;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.view-details-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   9. ปุ่มทั่วไปและข้อความทักทาย (Buttons & Greeting)
+   ========================================================================== */
 
 button {
-    margin-top: 16px; /* กำหนดระยะห่างด้านบน */
-    padding: 12px 24px; /* กำหนดระยะห่างด้านในปุ่ม */
-    border: none; /* ลบเส้นขอบปุ่ม */
-    border-radius: 8px; /* กำหนดความโค้งของมุมปุ่ม */
-    background: #2563eb; /* กำหนดสีพื้นหลังปุ่ม */
-    color: #f0f8ff; /* กำหนดสีข้อความบนปุ่ม */
-    font-size: 16px; /* กำหนดขนาดตัวอักษร */
-    cursor: pointer; /* เปลี่ยนรูปแบบเมาส์เมื่อชี้ปุ่ม */
+    margin-top: 16px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
-    background: #1e40af; /* เปลี่ยนสีปุ่มเมื่อเลื่อนเมาส์ */
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+#greetingBtn {
+    display: inline-block;
 }
 
 #greetingMessage {
-    color: #2563eb; /* กำหนดสีข้อความทักทาย */
-    font-weight: bold; /* กำหนดข้อความเป็นตัวหนา */
+    color: var(--accent-blue);
+    font-weight: 600;
+    margin-top: 12px;
 }
 
-
-/* =================================
-   10. ส่วนท้ายของเว็บไซต์
-================================= */
-
-.site-footer {
-    border-radius: 20px; /* กำหนดความโค้งของมุมส่วนท้าย */
-    margin-top: 40px; /* กำหนดระยะห่างด้านบน */
-    padding: 24px; /* กำหนดระยะห่างด้านใน */
-    background: #0f172a; /* กำหนดสีพื้นหลังส่วนท้าย */
-    color: #ffffff; /* กำหนดสีข้อความ */
-    text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
-}
-
-.site-footer p {
-    margin: 4px 0; /* กำหนดระยะห่างข้อความด้านบนและด้านล่าง */
-}
-
-
-/* =================================
-   11. การรองรับหน้าจอมือถือ
-================================= */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 16px 10px; /* ลดระยะห่างของหน้าเว็บบนมือถือ */
-    }
-
-    .site-header {
-        padding: 20px; /* ลดระยะห่างด้านในส่วนหัว */
-        flex-direction: column; /* จัดองค์ประกอบส่วนหัวเป็นแนวตั้ง */
-    }
-
-    .site-header nav ul {
-        flex-wrap: wrap; /* อนุญาตให้เมนูขึ้นบรรทัดใหม่ */
-        justify-content: center; /* จัดเมนูให้อยู่กึ่งกลาง */
-    }
-
-    .profile-section,
-    .content-section {
-        padding: 20px; /* ลดระยะห่างด้านในการ์ด */
-    }
-
-    #skills {
-        padding: 12px; /* กำหนดระยะห่างด้านในการ์ดทักษะ */
-    }
-
-    #skills .skills-list {
-        gap: 5px; /* ลดระยะห่างระหว่างปุ่มทักษะ */
-    }
-
-    #skills .skills-list li {
-        font-size: 11px; /* ลดขนาดตัวอักษรบนปุ่ม */
-        padding: 8px 3px; /* ลดระยะห่างด้านในปุ่ม */
-    }
-}
-
-
-/* ======================================
-   Website Cost Estimator
-   ====================================== */
+/* ==========================================================================
+   10. ส่วนประมาณการค่าบริการ (Website Cost Estimator)
+   ========================================================================== */
 
 #estimator {
     text-align: center;
-    margin-top: 30px;
 }
 
 #estimator h2 {
-    color: #333;
-    margin-bottom: 15px;
+    color: var(--text-title);
+    margin-bottom: 12px;
 }
 
 #estimator p {
@@ -314,41 +583,405 @@ button:hover {
 }
 
 #estimateBtn {
-    background-color: #2563eb;
+    background-color: var(--primary-color);
     color: white;
-    border: none;
-    padding: 12px 25px;
+    padding: 12px 28px;
     border-radius: 8px;
     font-size: 16px;
-    cursor: pointer;
-    margin: 15px 0;
-    transition: 0.3s;
+    margin: 12px 0 16px;
 }
 
 #estimateBtn:hover {
-    background-color: #1d4ed8;
-    transform: translateY(-2px);
+    background-color: var(--primary-hover);
 }
 
 #estimateResult {
-    background-color: #f0f5ff;
-    border: 1px solid #cbdcff;
+    background-color: var(--bg-estimator-result);
+    border: 1px solid var(--border-inner);
     border-radius: 10px;
-    padding: 15px;
+    padding: 18px;
     margin-top: 15px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #estimateResult p {
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 6px 0;
 }
 
 #pageCount {
-    color: #2563eb;
+    color: var(--primary-color);
 }
 
 #totalCost {
-    color: #16a34a;
-    font-size: 20px;
-    font-weight: bold;
+    color: var(--accent-green);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   11. แบบฟอร์มติดต่อ (Contact Form)
+   ========================================================================== */
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-title);
+}
+
+.required-star {
+    color: var(--error-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-input);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-group input.is-invalid,
+.form-group textarea.is-invalid {
+    border-color: var(--error-color);
+    background-color: var(--error-bg);
+}
+
+.error-feedback {
+    color: var(--error-color);
+    font-size: 12px;
+    font-weight: 500;
+    min-height: 18px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: var(--primary-color);
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 6px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s, transform 0.2s, opacity 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ข้อความแจ้งเตือนผลการส่งฟอร์ม (Alert Box) */
+.contact-alert {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    animation: fadeIn 0.3s ease;
+}
+
+.contact-alert.success {
+    background-color: var(--success-bg);
+    border: 1px solid var(--success-border);
+    color: var(--success-text);
+}
+
+.contact-alert.error {
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-color);
+    color: var(--error-color);
+}
+
+/* ==========================================================================
+   12. หน้าต่างแสดงรายละเอียดผลงาน (Project Details Modal)
+   ========================================================================== */
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.modal-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-dialog {
+    background: var(--bg-modal);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 620px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-modal);
+    position: relative;
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.is-open .modal-dialog {
+    transform: scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    margin: 0;
+}
+
+.modal-close-btn:hover {
+    color: var(--text-primary);
+    background: transparent;
+    transform: scale(1.1);
+}
+
+.modal-content {
+    padding: 28px 24px;
+}
+
+.modal-header {
+    margin-bottom: 16px;
+    padding-right: 32px;
+}
+
+.modal-header h3 {
+    font-size: 22px;
+    color: var(--text-title);
+    margin: 8px 0 0;
+}
+
+.modal-image-container {
+    width: 100%;
+    height: 140px;
+    background: var(--bg-card-inner);
+    border: 1px dashed var(--border-inner);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.modal-placeholder-icon {
+    font-size: 52px;
+}
+
+.modal-body h4 {
+    font-size: 15px;
+    color: var(--accent-blue);
+    margin: 16px 0 6px;
+}
+
+.modal-body p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.modal-features-list {
+    margin: 8px 0 16px;
+    padding-left: 20px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.modal-features-list li {
+    margin-bottom: 6px;
+}
+
+.modal-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.tech-tag {
+    background: var(--bg-card-inner);
+    color: var(--primary-color);
+    border: 1px solid var(--border-inner);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-inner);
+}
+
+.btn-secondary {
+    background: var(--bg-card-inner);
+    color: var(--text-primary);
+    border: 1px solid var(--border-inner);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.btn-secondary:hover {
+    background: var(--border-inner);
+}
+
+/* ==========================================================================
+   13. ส่วนท้ายของเว็บไซต์ (Footer)
+   ========================================================================== */
+
+.site-footer {
+    border-radius: 20px;
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--bg-footer);
+    color: var(--text-footer);
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+}
+
+.site-footer p {
+    margin: 4px 0;
+    color: var(--text-footer);
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   14. การรองรับหน้าจออุปกรณ์ต่าง ๆ (Responsive Design)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        padding: 18px;
+        text-align: center;
+    }
+
+    .site-header nav ul {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .theme-toggle-btn {
+        margin-top: 4px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 16px 10px;
+    }
+
+    .site-header {
+        padding: 16px 12px;
+        top: 6px;
+    }
+
+    .site-header nav ul {
+        gap: 6px;
+    }
+
+    .site-header nav a {
+        font-size: 13px;
+        padding: 5px 8px;
+    }
+
+    .profile-section,
+    .content-section {
+        padding: 20px 16px;
+    }
+
+    .skills-list {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .skills-list li {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    .filter-container {
+        justify-content: center;
+    }
+
+    .filter-btn {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+
+    .modal-content {
+        padding: 20px 16px;
+    }
 }

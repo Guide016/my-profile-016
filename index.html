@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
+    <title>My Profile - Developer Portfolio</title>
+    <!-- Google Font เพื่อการแสดงผลภาษาไทยที่สวยงามและทันสมัย -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- ส่วนหัวและเมนู -->
+    <!-- ส่วนหัวและเมนูนำทาง -->
     <header class="site-header">
-        <h1>My Profile</h1>
-        <nav>
+        <div class="header-brand">
+            <h1>My Profile</h1>
+        </div>
+        <nav aria-label="เมนูหลัก">
             <ul>
                 <li><a href="#about">เกี่ยวกับฉัน</a></li>
                 <li><a href="#skills">ทักษะ</a></li>
                 <li><a href="#projects">ผลงาน</a></li>
                 <li><a href="#estimator">ประมาณการค่าบริการ</a></li>
+                <li><a href="#contact">ติดต่อฉัน</a></li>
             </ul>
         </nav>
+        <!-- ปุ่มสลับธีม Light/Dark Mode -->
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="สลับธีมการแสดงผล" title="สลับโหมดมืด/สว่าง">
+            <span class="theme-icon" id="themeIcon">🌙</span>
+            <span class="theme-label" id="themeLabel">Dark Mode</span>
+        </button>
     </header>
 
     <!-- เนื้อหาหลัก -->
@@ -70,54 +82,186 @@
             </ul>
         </section>
 
-        <!-- การ์ดผลงาน -->
+        <!-- การ์ดผลงานและระบบกรองผลงาน (Projects & Filter) -->
         <section class="content-section" id="projects">
             <h2>ผลงานของฉัน</h2>
+            <p class="section-desc">รวบรวมผลงานการพัฒนาเว็บไซต์ การออกแบบ UI/UX และการวิเคราะห์ข้อมูล</p>
 
-            <div class="project-card">
-                <h3>My Developer Profile</h3>
+            <!-- แถบกรองหมวดหมู่ผลงาน (Project Filter) -->
+            <div class="filter-container" role="group" aria-label="ตัวกรองหมวดหมู่ผลงาน">
+                <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+                <button class="filter-btn" data-filter="web">การพัฒนาเว็บ</button>
+                <button class="filter-btn" data-filter="design">การออกแบบ UI/UX</button>
+                <button class="filter-btn" data-filter="data">การวิเคราะห์ข้อมูล</button>
+            </div>
+
+            <!-- รายการผลงาน (Project Cards Grid) -->
+            <div class="projects-grid" id="projectsGrid">
+                
+                <!-- ผลงานเดิม: My Developer Profile -->
+                <div class="project-card" data-category="web" data-id="project-1">
+                    <div class="project-card-header">
+                        <span class="project-badge badge-web">การพัฒนาเว็บ</span>
+                    </div>
+                    <h3>My Developer Profile</h3>
+                    <p>
+                        เว็บไซต์แนะนำตัวที่พัฒนาด้วย HTML, CSS
+                        และ JavaScript เพื่อฝึกสร้างโครงสร้างเว็บ
+                        การตกแต่งหน้าเว็บไซต์ และการโต้ตอบกับผู้ใช้
+                    </p>
+                    <div class="project-card-footer">
+                        <span class="project-tech-tags">HTML5 • CSS3 • JavaScript</span>
+                        <button class="view-details-btn" data-project-id="project-1">ดูรายละเอียด</button>
+                    </div>
+                </div>
+
+                <!-- ผลงานเพิ่มเติม 1: Student Grade & Data Dashboard -->
+                <div class="project-card" data-category="data" data-id="project-2">
+                    <div class="project-card-header">
+                        <span class="project-badge badge-data">การวิเคราะห์ข้อมูล</span>
+                    </div>
+                    <h3>Student Grade & Data Dashboard</h3>
+                    <p>
+                        ระบบแสดงภาพรวมผลการเรียนและวิเคราะห์สถิติคลิกเข้าเรียนของนักศึกษา 
+                        แสดงผลสถิติในรูปแบบกราฟแบบโต้ตอบเพื่อให้เข้าใจง่าย
+                    </p>
+                    <div class="project-card-footer">
+                        <span class="project-tech-tags">Data Analytics • Chart.js • JS</span>
+                        <button class="view-details-btn" data-project-id="project-2">ดูรายละเอียด</button>
+                    </div>
+                </div>
+
+                <!-- ผลงานเพิ่มเติม 2: Smart Cafe UI/UX Redesign -->
+                <div class="project-card" data-category="design" data-id="project-3">
+                    <div class="project-card-header">
+                        <span class="project-badge badge-design">การออกแบบ UI/UX</span>
+                    </div>
+                    <h3>Smart Cafe UI/UX Redesign</h3>
+                    <p>
+                        ออกแบบหน้าจอระบบสั่งเครื่องดื่มและสะสมแต้มสำหรับร้านคาเฟ่ 
+                        เน้นการจัดวางที่เป็นมิตรต่อผู้ใช้ (User-friendly) และรองรับการสั่งซื้อผ่านมือถือ
+                    </p>
+                    <div class="project-card-footer">
+                        <span class="project-tech-tags">UI/UX • Figma • Responsive</span>
+                        <button class="view-details-btn" data-project-id="project-3">ดูรายละเอียด</button>
+                    </div>
+                </div>
+
+                <!-- ผลงานเพิ่มเติม 3: Task & Habit Tracker Web App -->
+                <div class="project-card" data-category="web" data-id="project-4">
+                    <div class="project-card-header">
+                        <span class="project-badge badge-web">การพัฒนาเว็บ</span>
+                    </div>
+                    <h3>Task & Habit Tracker Web App</h3>
+                    <p>
+                        เว็บแอปพลิเคชันจัดการตารางเวลาและติดตามเป้าหมายการพัฒนาตนเอง 
+                        มีระบบบันทึกข้อมูลในเครื่อง (LocalStorage) และแจ้งเตือนกิจกรรม
+                    </p>
+                    <div class="project-card-footer">
+                        <span class="project-tech-tags">Vanilla JS • LocalStorage • CSS Grid</span>
+                        <button class="view-details-btn" data-project-id="project-4">ดูรายละเอียด</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ระบบประมาณการค่าบริการพัฒนาเว็บไซต์ (เดิมคงไว้ครบถ้วน) -->
+        <section class="content-section" id="estimator">
+            <h2>Website Cost Estimator</h2>
+            <p>ประมาณการค่าบริการพัฒนาเว็บไซต์</p>
+            <p>ราคาค่าพัฒนาเว็บไซต์หน้าละ 500 บาท</p>
+
+            <button id="estimateBtn">
+                คำนวณค่าบริการ
+            </button>
+
+            <div id="estimateResult">
+                <p>จำนวนหน้า: <span id="pageCount">-</span></p>
                 <p>
-                    เว็บไซต์แนะนำตัวที่พัฒนาด้วย HTML, CSS
-                    และ JavaScript เพื่อฝึกสร้างโครงสร้างเว็บ
-                    การตกแต่งหน้าเว็บไซต์ และการโต้ตอบกับผู้ใช้
+                    ค่าบริการรวม:
+                    <span id="totalCost">-</span>
                 </p>
             </div>
         </section>
 
-        <!-- ระบบประมาณการค่าบริการพัฒนาเว็บไซต์ -->
-<section class="content-section" id="estimator">
+        <!-- ส่วนฟอร์มติดต่อ (Contact Form พร้อมการตรวจสอบข้อมูลและส่งตรงเข้า Gmail) -->
+        <section class="content-section" id="contact">
+            <h2>ติดต่อฉัน (Contact Me)</h2>
+            <p class="section-desc">ส่งข้อความ สอบถามข้อมูล หรือเสนอโปรเจกต์งานพัฒนาเว็บไซต์ได้ที่ฟอร์มด้านล่างนี้ (ข้อความจะถูกส่งตรงไปยังอีเมล: <strong>key013887@gmail.com</strong>)</p>
 
-    <h2>Website Cost Estimator</h2>
+            <!-- กล่องแสดงผลการส่งข้อความแจ้งเตือน (Notification Banner) -->
+            <div id="contactAlert" class="contact-alert" role="alert" style="display: none;"></div>
 
-    <p>
-        ประมาณการค่าบริการพัฒนาเว็บไซต์
-    </p>
+            <form id="contactForm" class="contact-form" novalidate>
+                <div class="form-group">
+                    <label for="contactName">ชื่อ - นามสกุล <span class="required-star">*</span></label>
+                    <input type="text" id="contactName" name="name" placeholder="เช่น สมชาย ใจดี" autocomplete="name">
+                    <span class="error-feedback" id="nameError"></span>
+                </div>
 
-    <p>
-        ราคาค่าพัฒนาเว็บไซต์หน้าละ 500 บาท
-    </p>
+                <div class="form-group">
+                    <label for="contactEmail">อีเมล <span class="required-star">*</span></label>
+                    <input type="email" id="contactEmail" name="email" placeholder="example@email.com" autocomplete="email">
+                    <span class="error-feedback" id="emailError"></span>
+                </div>
 
-    <button id="estimateBtn">
-        คำนวณค่าบริการ
-    </button>
+                <div class="form-group">
+                    <label for="contactSubject">หัวข้อติดต่อ</label>
+                    <input type="text" id="contactSubject" name="subject" placeholder="เช่น สนใจพัฒนาเว็บไซต์ Portfolio">
+                </div>
 
-    <div id="estimateResult">
-        <p>จำนวนหน้า: <span id="pageCount">-</span></p>
+                <div class="form-group">
+                    <label for="contactMessage">ข้อความ <span class="required-star">*</span></label>
+                    <textarea id="contactMessage" name="message" rows="5" placeholder="กรอกรายละเอียดข้อความที่ต้องการติดต่อ (อย่างน้อย 10 ตัวอักษร)"></textarea>
+                    <span class="error-feedback" id="messageError"></span>
+                </div>
 
-        <p>
-            ค่าบริการรวม:
-            <span id="totalCost">-</span>
-        </p>
-    </div>
-
-</section>
+                <button type="submit" id="contactSubmitBtn" class="submit-btn">
+                    <span>ส่งข้อความ</span>
+                </button>
+            </form>
+        </section>
         
     </main>
+
+    <!-- Modal แสดงรายละเอียดผลงานเพิ่มเติม (Project Details Modal) -->
+    <div id="projectModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+        <div class="modal-dialog">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="ปิดหน้าต่าง">&times;</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="modalCategory" class="project-badge">หมวดหมู่</span>
+                    <h3 id="modalTitle">ชื่อผลงาน</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image-container" id="modalImageContainer">
+                        <div class="modal-placeholder-icon">💻</div>
+                    </div>
+                    <h4>รายละเอียดโครงการ</h4>
+                    <p id="modalDescription">เนื้อหารายละเอียดของผลงาน...</p>
+                    
+                    <h4>ฟีเจอร์สำคัญ (Key Features)</h4>
+                    <ul id="modalFeatures" class="modal-features-list">
+                        <!-- รายการฟีเจอร์จะถูกสร้างด้วย JavaScript -->
+                    </ul>
+
+                    <h4>เครื่องมือและเทคโนโลยี (Tech Stack)</h4>
+                    <div id="modalTechStack" class="modal-tech-stack">
+                        <!-- แท็กเทคโนโลยีจะถูกสร้างด้วย JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" id="modalCloseActionBtn">ปิดหน้าต่าง</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ส่วนท้าย -->
     <footer class="site-footer">
         <p>My Developer Portfolio</p>
-        <p>สร้างด้วย HTML และ CSS</p>
+        <p>สร้างด้วย HTML และ CSS | พัฒนาต่อยอดระบบด้วย JavaScript</p>
     </footer>
 
 </body>
